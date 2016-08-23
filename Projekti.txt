@@ -1,0 +1,14 @@
+Rock - Paper - Scissors:
+http://www.codeskulptor.org/#user40_nx1jPRTVyy_4.py
+
+Number guessing game:
+http://www.codeskulptor.org/#user40_S169pkE6yk_1.py
+
+Convert value 2 dollars and cents:
+http://www.codeskulptor.org/#user40_e4uV0993sM_0.py
+
+Time game
+http://www.codeskulptor.org/#user40_PzldSfJSJU_3.py
+
+Pong
+http://www.codeskulptor.org/#user40_W3ByqX9vSj_9.py
