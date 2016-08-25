@@ -3,71 +3,72 @@ import simplegui
 
 # define global variables
 time = 0
-start_count = 0
-stop_count = 0
+pocetak = 0
+kraj = 0
 
 
 # define helper function format that converts time
 # in tenths of seconds into formatted string A:BC.D
-def format_time(time):
+def format(time):
     a = int(time/600)
     b = int(time/100)%6
     c = int(time/10)%10
     d = int(time%10)
     
-    return str(a) + ":" + str(b) + str(c) + "." + str(d)
+    formatirano = str(a) + ":" + str(b) + str(c) + "." + str(d)
+    return formatirano
 
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start_time():
-    global start_count
-    if timer.is_running == False:
-        start_count += 1
+    global pocetak
+    if timer.is_running != True:
+        pocetak += 1
         timer.is_running = True
-    print "Start= ", start_count
+    print "Start: ", pocetak
     timer.start()
 
 def stop_time():
-    global stop_count
-    print "Timer status: ", timer.is_running
-    if timer.is_running == True:
-        stop_count += 1
+    global kraj
+    print "Trenutni status: ", timer.is_running
+    if timer.is_running != False:
+        kraj += 1
         timer.is_running = False
-    print "Stop= ", stop_count
+    print "Stop: ", kraj
     timer.stop()
     
-def reset_time():
+def reset():
     timer.stop()
-    global time
-    global start_count
-    global stop_count
+    global time, pocetak, kraj
+    #global pocetak
+    #global kraj
     time = 0
-    start_count = 0
-    stop_count = 0
+    pocetak = 0
+    kraj = 0
     
 
 # define event handler for timer with 0.1 sec interval
 def create_timer():
     global time
-    time = time + 1 
+    time += 1 
 
 # define draw handler
 def draw(canvas):
-    canvas.draw_text(format_time(time), [30,30], 20, "green")
-    canvas.draw_text("Start count: " + str(start_count), [140,30], 15, "red")
-    canvas.draw_text("Stop count: " + str(stop_count), [140, 50], 15, "red")
+    canvas.draw_text(format(time), [10,20], 26, "blue")
+    canvas.draw_text("Pocni: " + str(pocetak), [10,50], 18, "red")
+    canvas.draw_text("Stani: " + str(kraj), [10, 70], 18, "red")
     
 # create frame
-frame = simplegui.create_frame("Digital Watch", 300, 200)
+frame = simplegui.create_frame("Stoperica", 150, 150)
 
 # register event handlers
 timer = simplegui.create_timer(100,create_timer)
+frame.set_canvas_background("white")
 frame.set_draw_handler(draw)
 start_button = frame.add_button("Start", start_time, 50)
-reset_button = frame.add_button("Reset", reset_time, 50)
+reset_button = frame.add_button("Reset", reset, 50)
 stop_button =  frame.add_button("Stop", stop_time, 50)
+
 
 # start frame
 frame.start()
 timer.is_running = False
-
-# Please remember to review the grading rubric
